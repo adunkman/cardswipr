@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates :netid, presence: true, uniqueness: true
   has_and_belongs_to_many :events
 
-  after_create :get_user_attributes
+  #after_create :get_user_attributes
 
   def get_user_attributes
     api_response = Yale::CardSwiprApiProxy.instance.find_by_netid(netid)

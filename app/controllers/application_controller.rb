@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  before_action CASClient::Frameworks::Rails::Filter
+  #before_action CASClient::Frameworks::Rails::Filter
   before_action :current_user
   helper_method :current_user
 
@@ -12,7 +12,19 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def current_user
-    @current_user ||= User.find_or_create_by(netid: session[:cas_user])
+    @current_user ||= User.new({
+      id: 2,
+      netid: "asdf",
+      first_name: "asdf",
+      last_name: "asdf",
+      nickname: "asdf",
+      email: "asdf",
+    })
+
+    @current_user.save
+    @current_user
+
+    #@current_user ||= User.find_or_create_by(netid: session[:cas_user])
   end
 
   rescue_from CanCan::AccessDenied do |exception|

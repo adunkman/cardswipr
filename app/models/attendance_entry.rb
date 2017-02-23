@@ -3,9 +3,9 @@
 class AttendanceEntry < ActiveRecord::Base
   belongs_to :event
   validates :event, presence: true
-  validates :upi, :uniqueness => { :scope => :event, :message => "This person has already been checked into this event." }
+  # validates :upi, :uniqueness => { :scope => :event, :message => "This person has already been checked into this event." }
 
-  after_create :get_directory_attributes
+  # after_create :get_directory_attributes
 
   # EventAttendanceEntry should be initialized with a upi
   # @param [string] upi = universal personal identification

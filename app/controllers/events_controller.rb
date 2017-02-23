@@ -83,18 +83,16 @@ class EventsController < ApplicationController
     @event = Event.find(params[:event_id])
     authorize! :update, @event
 
-    person = YaleIDLookup.lookup(params[:query])
+    person = params[:query]
     if person.nil?
       flash[:error] = 'Could not find the person.'
       return nil
     end
 
-    upi = person.upi
-
     # automatically attempts LDAP as long as there is a UPI present
-    attendanceentry = AttendanceEntry.new(upi: upi, event: @event)
+    attendanceentry = AttendanceEntry.new(upi: person, first_name: person, last_name: person, event: @event)
     if attendanceentry.save
-      flash[:notice] = "#{attendanceentry.name} has been successfully recorded for this event."
+      flash[:notice] = "!!! has been successfully recorded for this event."
       @count = @event.attendance_entries.count
     else
       flash[:error] = ""

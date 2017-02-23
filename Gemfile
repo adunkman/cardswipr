@@ -81,17 +81,3 @@ group :test do
   gem 'webmock', '~> 1.22.3'
   gem 'selenium-webdriver', '~> 2.48.1'
 end
-
-group :local, :test do
-  # Forcing rugged to 0.22.2 because any version above fails to complie
-  # on the current Yale host.
-  # 0.23.1 intruduced dependency on cmake 2.8 while the server has 2.6.
-  # 0.23.0 still failed to compile with some other reason.
-  gem 'rugged', '0.22.2'
-  gem 'pronto', '0.4.2'
-  gem 'pronto-rubocop', '~> 0.4.6'
-  gem 'pronto-flay', '~> 0.4.2'
-  gem 'pronto-brakeman', '~> 0.4.2'
-  gem 'pronto-rails_best_practices', '~> 0.4.0'
-  gem 'pronto-reek', '~> 0.4.3'
-end
